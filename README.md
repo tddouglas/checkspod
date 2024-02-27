@@ -1,0 +1,1 @@
+Can use [Observable 2.0](https://observablehq.com/blog/observable-2-0) for each data visulazation of scraped data. 
