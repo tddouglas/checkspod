@@ -1,0 +1,92 @@
+The following text is a transcript from a podcast where the podcast host asks two contestants a question and each contestant may answer the question. I'd like you to read the transcript and determine the following -
+1. What questions were asked
+2. What was each contestant's answer to the asked question. If a contestant did not answer the question, put "no answer"
+3. Was each contestant's answer correct
+Please Provide the answer in the following format:
+Question - {question_body}
+Contestant_0 answer - {answer}
+Contestant_0 correct - {y/n}
+Contestant_0 first - {y/n}
+Contestant_1 answer - {answer}
+Contestant_1 correct - {y/n}
+Contestant_1 first - {y/n}
+Transcript:
+SPEAKER_02 - Right, now it's quiz time.
+SPEAKER_02 - We heard earlier about George W. Bush, who during his presidency was, of course, known for his verbal gaffes or Bushisms.
+SPEAKER_02 - I'm going to read you some quotes, and I want you to tell me if they were said by George W. Bush or by another politician. If both correctly identify the answer, tell me which one said the correct answer first.
+SPEAKER_02 -  There are a few of these, so we're going to go quick fire.
+SPEAKER_02 - Okay, the first.
+SPEAKER_02 - I know how hard it is for you to put food on your family.
+SPEAKER_01 - That was Bush.
+SPEAKER_01 - Wasn't it?
+SPEAKER_02 - That was Bush.
+SPEAKER_00 - That was so good.
+SPEAKER_00 -  I mean, I kind of sympathize.
+SPEAKER_00 - I would say that kind of thing.
+SPEAKER_02 - So good.
+SPEAKER_02 - I would.
+SPEAKER_02 - And I'm sure I have on the podcast and it's just been edited out by Harriet.
+SPEAKER_02 - So I think this is one of the many things, actually, that made George Bush much more sympathetic.
+SPEAKER_02 - But anyway, that's a that's a sidetrack.
+SPEAKER_02 - OK, next one.
+SPEAKER_02 - I believe we are on an irreversible trend toward more freedom and democracy.
+SPEAKER_02 - But that could change.
+SPEAKER_00 -  That really is so good.
+SPEAKER_01 - That does sound like Bush, but I don't recognize it as a Bushism, so I don't know.
+SPEAKER_02 - What are you guys going with?
+SPEAKER_00 - I'm going with nay.
+SPEAKER_01 - I'm going nay.
+SPEAKER_02 - It is nay.
+SPEAKER_02 - It was Dan Quayle who's also a rich source of these sorts of things.
+SPEAKER_02 - Okay, next one.
+SPEAKER_02 - Families is where... Sorry.
+SPEAKER_02 - Families is where our nation finds hope, where wings take dream.
+SPEAKER_02 -  Sounds like it's been translated from Japanese.
+SPEAKER_01 - No, no.
+SPEAKER_01 - That sounds like Palin or something.
+SPEAKER_00 - It sounds like Palin or Will Ferrell doing George W. Bush.
+SPEAKER_02 - It was actually George W. Bush doing George W. Bush.
+SPEAKER_02 - It's a particularly good one.
+SPEAKER_02 - OK, next one.
+SPEAKER_02 - Rarely is the question asked.
+SPEAKER_02 - Is our children learning?
+SPEAKER_01 - I think that was him, wasn't it?
+SPEAKER_02 -  That was George W., yep.
+SPEAKER_02 - Next one.
+SPEAKER_02 - If we do everything right, if we do it with absolute certainty, there's still a 30% chance we're going to get it wrong.
+SPEAKER_00 - That sounds like it could be Biden.
+SPEAKER_02 - That was Joe Biden.
+SPEAKER_02 - That was Joe Biden, you're right about that.
+SPEAKER_01 - Wow, excellent.
+SPEAKER_02 - All right, next one.
+SPEAKER_02 - The future will be better tomorrow.
+SPEAKER_00 - No, I don't think that's him.
+SPEAKER_02 - No, that's Dan Quayle again.
+SPEAKER_02 - Last one, and you'll have to be quick on this.
+SPEAKER_02 - They misunderestimated me.
+SPEAKER_00 - Yes, that was him.
+SPEAKER_02 - That was him.
+SPEAKER_00 -  I won that quiz, John, because the Biden ID was a three-pointer.
+SPEAKER_02 - Ah, OK, yes.
+SPEAKER_01 - Well, if we get to grade our own quizzes, then it works for me.
+SPEAKER_02 - I don't think it's about the winning.
+SPEAKER_02 - It's really about the participation.
+SPEAKER_02 - And you have participated.
+SPEAKER_01 - It's the journey.
+SPEAKER_02 - It is of a journey, exactly.
+SPEAKER_02 - And that journey, you'll be pleased to know, has now come to an end.
+SPEAKER_02 -  That's it for this week.
+SPEAKER_02 - Thank you, Charlotte.
+SPEAKER_02 - Thank you, Idris.
+SPEAKER_00 - Thank you.
+SPEAKER_01 - Thank you.
+SPEAKER_02 - This episode was produced by Harriet Noble.
+SPEAKER_02 - Carla Patella is our sound engineer.
+SPEAKER_02 - If you like the podcast, then please let people know and leave us a rating and a review.
+SPEAKER_02 - On The Weekend Intelligence this week, our colleague Tamara jilks Bohr on whether you should own a gun or not.
+SPEAKER_02 - We also have a Checks and Balance newsletter.
+SPEAKER_02 - You can sign up for that at economist.com slash newsletters.
+SPEAKER_02 -  In the meantime, thanks very much for listening.
+SPEAKER_02 - Stay safe, stay sane.
+SPEAKER_02 - We'll have more Checks and Balance next week.
+Questions and answers:

@@ -6,27 +6,23 @@ import ffmpeg
 # Class for importing and manipulating audio files. Checkspod_downloader downloads .mp3 files from economist.com
 # This will take in a .mp3 file, shorten it to 7 minutes and convert it to a .wav for pyannote
 
-AUDIO_BASE_PATH = "checkspod_files.nosync"
+# STATIC_BASE_PATH = "checkspod_files.nosync/"
+STATIC_BASE_PATH_WINDOWS = "checkspod_files/"
+
+
+def construct_wav_path(filename):
+    return STATIC_BASE_PATH_WINDOWS + filename + '.wav'
+
+
+def construct_rttm_path(filename):
+    return STATIC_BASE_PATH_WINDOWS + 'rttm_audio/' + filename + '.rttm'
 
 
 # Open mp3 file, shorten it, then convert it to .wav
-def mp3_to_wav_pipeline(filename):
-    mp3_audio = load_mp3_audio(construct_audio_path(filename, False))
+def mp3_to_wav_pipeline(mp3_audio_path, wav_audio_path):
+    mp3_audio = load_mp3_audio(mp3_audio_path)
     shortened_audio = shorten_audio(mp3_audio)
-    export_wav_audio(shortened_audio, filename)
-
-
-def construct_audio_path(filename, trimmed: bool, extension: str):
-    # Check extension is supported
-    if not trimmed and extension != "mp3":
-        print("MP3 only supported filetype for full audio files")
-    if trimmed and extension != 'wav' or extension != 'rttm':
-        print("Trimmed audio files only support rttm or wav")
-
-    if trimmed:
-        return f"{AUDIO_BASE_PATH}/trimmed/trim-{filename}.{extension}"
-    else:
-        return f"{AUDIO_BASE_PATH}/{filename}.{extension}"
+    export_wav_audio(shortened_audio, wav_audio_path)
 
 
 def load_mp3_audio(audio_path):
@@ -34,7 +30,7 @@ def load_mp3_audio(audio_path):
 
 
 def load_wav_audio(audio_path):
-    return AudioSegment.from_wav(audio_path)
+    return AudioSegment.from_file(audio_path)
 
 
 def audio_to_nparray(trimmed_audio):
@@ -82,8 +78,11 @@ def load_audio(file: (str, bytes), sr: int = 16000):
 # Trim .mp3 audio file to specified time (s)
 def shorten_audio(audio):
     # last_5_minutes = audio[-300000:]
+
+    if len(audio) < 430000:  # Check if audio is less than 7 minutes. Is so, don't shorten
+        return audio
     return audio[-430000:]  # Last 7 minutes
 
 
 def export_wav_audio(audio, filename):
-    audio.export(construct_audio_path(filename, True, "wav"), format="wav")
+    audio.export(construct_wav_path(filename))

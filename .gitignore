@@ -1,7 +1,11 @@
 venv/
 __pycache__/
 
-checkspod_files.nosync/*
-
 .DS_Store
+.env
+
+checkspod_files.nosync/*
+checkspod_files/*
+
+
 

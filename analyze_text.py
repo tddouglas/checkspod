@@ -1,5 +1,5 @@
-from nltk.book import *
-import whisper
+from transformers import pipeline, AutoTokenizer
+import torch
 
 # Take in text and process it
 
@@ -12,25 +12,38 @@ Goal - Separate out last 5 minutes of audio into text and determine:
 5. Who was the overall winner of the quiz? 
 
 Data Store:
+Episodes Table -
+1. Id - Epside Id
+2. Title - title of episode
+3. publish_date - Date episode was published online
+4. summary - Summary of episode
+5. filename - name of file without any extension
+6. size - file size in MB (? I think)
+7. url - url where episode was downloaded from
+8. duration - duration of episode (s)  
+
 Participants Table -
-1. ParticipantId (id: number)
-2. ParticipantName (string)
+1. id (id: number)
+2. participant_name (string)
 
 Questions Table -
-1. QuestionId (id: number)
-2. EpisodeNumber (number)
-3. Question - What was the question (string)
-4. Answer - What was the correct answer (string)
+1. id (id: number)
+2. episode_id (number) (id: fk)
+3. question - What was the question (string)
+4. answer - What was the correct answer (string)
 
-Quiz Table -
-1. QuestionId (id: fk)
-2. ParticpantId - Who answered the question (id: fk)
-3. ParticpantAnswer - What was the particpant's answer (string)
-4. Award - Number of points awarded (number)
+episode_questions Table -
+1. episode_id - (id: fk)
+2. question_id - (id: fk)
+2. participant_id - Who answered the question (id: fk)
+3. participant_answer - What was the particpant's answer (string)
+4. award - Number of points awarded (number)
 '''
 
-nltk.download("book")
-text8.concordance("quiz")  # analyze quiz usage in corpus
+
+# Can you the nltk library and concordance() to analyze text
+# nltk.download("book")
+# text8.concordance("quiz")  # analyze quiz usage in corpus
 
 
 def gpt_analyze_transcript():
@@ -38,3 +51,29 @@ def gpt_analyze_transcript():
     # https://www.agenthost.ai/blog/open-ai-host-gpt-website
     pass
 
+# This function should take the full transcript and truncate it where the quiz starts
+def quiz_determination():
+    pass
+
+
+def local_analysis(prompt):
+    model = "tiiuae/falcon-7b-instruct"
+    tokenizer = AutoTokenizer.from_pretrained(model)
+    pipe = pipeline(
+        "text-generation",
+        model=model,
+        tokenizer=tokenizer,
+        torch_dtype=torch.bfloat16,
+        device_map="auto",
+    )
+    torch.manual_seed(0)
+
+    sequences = pipe(
+        prompt,
+        max_new_tokens=10,
+        do_sample=True,
+        top_k=10,
+        return_full_text=False,
+    )
+    for seq in sequences:
+        print(f"Result: {seq['generated_text']}")
