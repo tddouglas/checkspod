@@ -56,6 +56,9 @@ def quiz_determination():
     pass
 
 
+# TODO: Find appropriate model to use. From huggingface chat (https://huggingface.co/chat/models) - MistralAi seems to give me best results with current prompt
+# Attempt to fine-tune on a qa dataset - https://huggingface.co/datasets?task_ids=task_ids%3Aextractive-qa
+# review transformer tutorials - https://huggingface.co/docs/transformers/tasks/question_answering
 def local_analysis(prompt):
     model = "tiiuae/falcon-7b-instruct"
     tokenizer = AutoTokenizer.from_pretrained(model)

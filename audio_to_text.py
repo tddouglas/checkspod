@@ -29,6 +29,7 @@ def audio_to_text(filename, diarization_required: bool):
 
 
 # What I'm implementing - https://github.com/openai/whisper/discussions/264#discussion-4451647
+# Review diarization tutorial for pyannote - https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/intro.ipynb
 def audio_diarization(filename: str, num_speakers=3):
     # Load pre-trained diarization pipeline - https://huggingface.co/pyannote/speaker-diarization-3.1
     try:
