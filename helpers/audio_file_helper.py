@@ -7,7 +7,7 @@ import ffmpeg
 # This will take in a .mp3 file, shorten it to 7 minutes and convert it to a .wav for pyannote
 
 # STATIC_BASE_PATH = "checkspod_files.nosync/"
-STATIC_BASE_PATH_WINDOWS = "checkspod_files/"
+STATIC_BASE_PATH_WINDOWS = "../checkspod_files/"
 
 
 def construct_wav_path(filename):

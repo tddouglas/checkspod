@@ -1,14 +1,13 @@
 import os
 import whisperx
-import gc
 import torchaudio
 import whisper
 from pyannote.audio import Pipeline
 from pyannote.audio.pipelines.utils.hook import ProgressHook
-from pyannote.core import Annotation, Timeline, Segment
+from pyannote.core import Annotation, Segment
 import torch
 from pydub import AudioSegment
-from audio_file_manipulator import load_wav_audio, load_audio, construct_wav_path, construct_rttm_path
+from helpers.audio_file_helper import load_wav_audio, load_audio, construct_wav_path, construct_rttm_path
 
 
 # Take in audio file (mp4) and return text representation of it. Speakers should be tagged via diarization
@@ -25,7 +24,7 @@ def audio_to_text(filename, diarization_required: bool):
         # print(f"Speaker {label} from {segment.start:.1f}s to {segment.end:.1f}s")
         transcription = audio_transcribe(wav_audio, segment.start, segment.end)
         output += f"{label} - {transcription}\n"
-    print(output)
+    return output
 
 
 # What I'm implementing - https://github.com/openai/whisper/discussions/264#discussion-4451647
@@ -113,11 +112,11 @@ def whisperx_diarization_transcribe(filename) -> str:
     model = whisperx.load_model("large-v2", device, compute_type=compute_type,asr_options=options)
     audio = whisperx.load_audio(audio_file)
     result = model.transcribe(audio, batch_size=batch_size)
-    print("Before Alignment\n", result["segments"])  # before alignment
+    # print("Before Alignment\n", result["segments"])  # before alignment
 
     model_a, metadata = whisperx.load_align_model(language_code=result["language"], device=device)
     result = whisperx.align(result["segments"], model_a, metadata, audio, device, return_char_alignments=False)
-    print("After Alignment\n", result["segments"])  # after alignment
+    # print("After Alignment\n", result["segments"])  # after alignment
 
 
     # 3. Assign speaker labels
@@ -130,8 +129,13 @@ def whisperx_diarization_transcribe(filename) -> str:
     result = whisperx.assign_word_speakers(diarize_segments, result)
     final_res = ""
     for segment in result["segments"]:
-        formatted_text = f"{segment['speaker']} - {segment['text']}"
+        if 'speaker' in segment:
+            speaker = segment['speaker']
+        else:
+            speaker = 'UNKNOWN'
+
+        formatted_text = f"{speaker} - {segment['text']}"
         final_res += formatted_text + '\n'
 
-    print(f"Final text is:\n{final_res}")
+    # print(f"Final text is:\n{final_res}")
     return final_res

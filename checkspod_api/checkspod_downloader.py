@@ -5,7 +5,7 @@ from pydantic import ValidationError
 import os
 import requests as r
 from bs4 import BeautifulSoup
-from audio_file_manipulator import mp3_to_wav_pipeline
+from helpers.audio_file_helper import mp3_to_wav_pipeline
 
 
 # This is a script to iterate through all Checks & Balance episodes, pull the details page for the list overview,

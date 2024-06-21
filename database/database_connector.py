@@ -1,4 +1,6 @@
 import sqlite3
+from typing import Generator
+
 from bs4 import BeautifulSoup
 from database.model import Episodes
 
@@ -12,6 +14,16 @@ try:
 except sqlite3.Error as e:
     print(f"Error while connecting to DB:\n{e}")
 
+
+def iterate_episodes(limit=0) -> Generator[Episodes, None, None]:
+    query = Episodes.select()
+    for x, episode in enumerate(query):
+        if limit and x == limit:
+            break
+        yield episode
+
+
+# Boilerplate for row insert
 def insert_row(column_name_tuple, tuple_to_insert):
     # Insert a row of data
     cur.execute("INSERT INTO episodes (name, value) VALUES ('SampleName', 'SampleValue')")
