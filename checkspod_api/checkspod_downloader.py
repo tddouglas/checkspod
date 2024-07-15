@@ -7,7 +7,6 @@ import requests as r
 from bs4 import BeautifulSoup
 from helpers.audio_file_helper import mp3_to_wav_pipeline
 
-
 # This is a script to iterate through all Checks & Balance episodes, pull the details page for the list overview,
 # then query the details page to pull the associated .mp3 file from the only media request on the details page
 # Should pull all files from January 17th, 2020 onward = 183 episodes. Episodes dynamic load so will need to solve
@@ -41,7 +40,7 @@ def new_episodes_available() -> List[APIEpisode]:
     return res
 
 
-def download_episode(episode_list: List[APIEpisode], max_downloads: int=0):
+def download_episode(episode_list: List[APIEpisode], max_downloads: int = 0):
     for x, episode in enumerate(episode_list):
         # Check if we've already downloaded the max number of files we want. This is for testing purposes.
         if max_downloads != 0 and x > 0:
@@ -109,6 +108,8 @@ def remove_file(filename):
 '''
 Returns true if there are episodes to download and they were downloaded successfully.
 '''
+
+
 def checkspod_pipeline() -> bool:
     success = False
     try:
@@ -117,5 +118,6 @@ def checkspod_pipeline() -> bool:
             download_episode(available_episodes)
             success = True
     except Exception as e:
-        print(f"An error occurred while downloading lastest checkspod eps:\n{e}")
-    finally: return success
+        print(f"An error occurred while downloading latest checkspod eps:\n{e}")
+    finally:
+        return success

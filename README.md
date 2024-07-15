@@ -1,4 +1,4 @@
-Can use [Observable 2.0](https://observablehq.com/blog/observable-2-0) for each data visulazation of scraped data.
+Can use [Observable 2.0](https://observablehq.com/blog/observable-2-0) for each data visualization of scraped data.
 
 torchaudio._backend.set_audio_backend warning will be fixed soon. Fix
 is [pushed to dev branch](https://github.com/pyannote/pyannote-audio/issues/1576).
@@ -13,6 +13,15 @@ is [pushed to dev branch](https://github.com/pyannote/pyannote-audio/issues/1576
 4. Create 10 transcription .txt files (done) and review them manually to make sure they are accurate
 5. Create huggingface database using transcription file and use for finetuning. See if they help scores based on evaluation framework. 
 
+## Next Speaker Verification Steps
+1. Best guess for speaker verification (or speaker identification) is to try to extract speaker embeddings from a diarization run and check if that embedding matches another run
+   - Looks like this approach has already been implemented [here](https://github.com/pyannote/pyannote-audio/issues/1383). Should check out. 
+2. Example of how to extract embedding and compare speaker [here](https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/speaker_verification.ipynb). 
+
+## Other Next Steps
+- Explore NVidia [Nemo Diarization](https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/asr/speaker_diarization/resources.html)
+- Move pipeline into it's own class? Make it easier to initialize/update
+
 ## Thoughts
 
 1. Speaker diarization is good but not great. There are some incorrectly attributed parts of speach which I suspect
@@ -26,3 +35,4 @@ is [pushed to dev branch](https://github.com/pyannote/pyannote-audio/issues/1576
     - Potential implementation option is laid out [here](https://github.com/pyannote/pyannote-audio/discussions/1667).
       Similar discussions
       found [here](https://github.com/pyannote/pyannote-audio/discussions/1226#discussioncomment-4686072).
+5. Could I use the embeddings from previous diarization runs and compare to determine speaker similarity

@@ -6,7 +6,7 @@ from database.model import Episodes
 
 try:
     # Connect to the database file (it will create the file if it doesn't exist)
-    conn = sqlite3.connect('checkspod.db')
+    conn = sqlite3.connect('database/checkspod.db')
 
     # Create a cursor object
     cur = conn.cursor()

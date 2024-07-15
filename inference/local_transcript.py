@@ -1,7 +1,7 @@
 from transformers import pipeline, AutoTokenizer
 import torch
 
-from helpers.text_file_helper import read_in_txt
+from helpers.txt_file_helper import read_in_txt
 
 # Take in text and process it
 
@@ -21,7 +21,7 @@ Goal - Separate out last 5 minutes of audio into text and determine:
 
 
 def get_prompt():
-    return read_in_txt('test_prompt.txt')
+    return read_in_txt('../test_prompt.txt')
 
 
 # TODO: Find appropriate model to use. From huggingface chat (https://huggingface.co/chat/models) - MistralAi seems to give me best results with current prompt
