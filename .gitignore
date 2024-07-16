@@ -1,11 +1,13 @@
 venv/
 __pycache__/
+.idea/*
 
 .DS_Store
 .env
 
 checkspod_files.nosync/*
 checkspod_files/*
+
 
 
 
