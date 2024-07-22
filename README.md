@@ -15,15 +15,20 @@ is [pushed to dev branch](https://github.com/pyannote/pyannote-audio/issues/1576
 
 ## Next Speaker Verification Steps
 1. Best guess for speaker verification (or speaker identification) is to try to extract speaker embeddings from a diarization run and check if that embedding matches another run
-   - Looks like this approach has already been implemented [here](https://github.com/pyannote/pyannote-audio/issues/1383). Should check out. 
-2. Example of how to extract embedding and compare speaker [here](https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/speaker_verification.ipynb). 
+   - Looks like this approach has already been implemented [here](https://github.com/pyannote/pyannote-audio/issues/1383) but was never merged to main. 
+2. Example of how to extract embedding and compare speaker [here](https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/speaker_verification.ipynb). This is not combined with diarization though.
 
 ## Other Next Steps
 - Explore NVidia [Nemo Diarization](https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/asr/speaker_diarization/resources.html)
+  - Seems promising. Can use `get_cluster_avg_embs()` function gor embedding extraction. Question is just can I run that with diarization or does it need to be done separately. Some guidance on that [here](https://github.com/NVIDIA/NeMo/issues/8171). 
 - Move pipeline into it's own class? Make it easier to initialize/update
 
-## Thoughts
+## Reading
+1. https://docs.voice-ping.com/voiceping-corporation-company-profile/apr-2024-speaker-diarization-performance-evaluation-pyannoteaudio-vs-nvidia-nemo-and-post-processing-approach-using-openais-gpt-4-turbo
+2. https://www.gladia.io/blog/build-a-speaker-identification-system-for-online-meetings
+3. https://medium.com/@gil.shomron/whos-talking-speaker-diarization-and-emotion-recognition-in-radio-3e9623baeb2c
 
+## Thoughts
 1. Speaker diarization is good but not great. There are some incorrectly attributed parts of speach which I suspect
    could be quite detrimental to the output of the quiz run.
 2. Translation is pretty good. Almost 100% accuracy from initial glance.
@@ -36,3 +41,10 @@ is [pushed to dev branch](https://github.com/pyannote/pyannote-audio/issues/1576
       Similar discussions
       found [here](https://github.com/pyannote/pyannote-audio/discussions/1226#discussioncomment-4686072).
 5. Could I use the embeddings from previous diarization runs and compare to determine speaker similarity
+
+## Notes
+Definitions taken from [here](https://github.com/NVIDIA/NeMo/issues/1710#issuecomment-776261922)
+- **Speaker Recognition** = Using labeled data to train a model from scratch or finetune an exisiting one to recognize speakers from given labels
+- **Speaker Verification** = Verifying if to speakers are the same without the need for labels. Aka, you don't care who the speakers are, just if they are the same
+- **Speaker Diarization** = Segmenting audio by speaker label
+- 

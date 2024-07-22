@@ -1,21 +1,22 @@
+import logging
 import numpy as np
 from pydub import AudioSegment
-from subprocess import CalledProcessError, run
 import ffmpeg
+
+from helpers.file_helper import get_base_path
 
 # Class for importing and manipulating audio files. Checkspod_downloader downloads .mp3 files from economist.com
 # This will take in a .mp3 file, shorten it to 7 minutes and convert it to a .wav for pyannote
 
-# STATIC_BASE_PATH = "checkspod_files.nosync/"
-STATIC_BASE_PATH_WINDOWS = "../checkspod_files/"
+logger = logging.getLogger(__name__)
 
 
 def construct_wav_path(filename):
-    return STATIC_BASE_PATH_WINDOWS + filename + '.wav'
+    return get_base_path() + filename + '.wav'
 
 
 def construct_rttm_path(filename):
-    return STATIC_BASE_PATH_WINDOWS + 'rttm_audio/' + filename + '.rttm'
+    return get_base_path() + 'rttm_audio/' + filename + '.rttm'
 
 
 # Open mp3 file, shorten it, then convert it to .wav

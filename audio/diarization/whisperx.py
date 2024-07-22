@@ -1,12 +1,13 @@
 import os
 import whisperx
 
-from audio_to_text.audio_to_text import get_torch_device
+from audio.torch import get_torch_device
 from helpers.audio_file_helper import construct_wav_path
 
 
 # Utilizes Whipserx for diarlization and transcription instead of Custom Implementation above.
-def whisperx_diarization_transcribe(filename) -> str:
+# Looks like WhisperX doesn't have embedding extraction support so might not be able to go with this
+def whisperx_diarization(filename) -> str:
     audio_file = construct_wav_path(filename)
     device = get_torch_device()
     batch_size = 16  # reduce if low on GPU mem

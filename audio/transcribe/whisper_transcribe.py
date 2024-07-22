@@ -3,7 +3,7 @@ import whisper
 from pydub import AudioSegment
 from helpers.audio_file_helper import load_audio
 
-logger = logging.getLogger('whisper_transcribe')
+logger = logging.getLogger(__name__)
 
 
 def audio_transcribe(chunked_audio: AudioSegment, audio_time_start: float, audio_time_end: float):

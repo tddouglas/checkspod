@@ -2,7 +2,12 @@ from helpers.audio_file_helper import construct_rttm_path
 from pyannote.core import Annotation, Segment
 
 
-def read_rttm_file(filename):
+def read_rttm_file(filename: str) -> Annotation:
+    """
+    Reads in rttm file from checkspod_files/rttm_audio folder
+    @param filename: Just filename. We are appending base path and file extension
+    @return: Annotation representing the audio file
+    """
     filepath = construct_rttm_path(filename)
     annotation = Annotation()
     with open(filepath, 'r') as file:

@@ -1,5 +1,6 @@
 import logging
 import logging.config
+import coloredlogs
 
 
 def setup_logging(log_level):
@@ -14,7 +15,7 @@ def setup_logging(log_level):
             'console': {
                 'class': 'logging.StreamHandler',
                 'formatter': 'standard',
-                'level': log_level,
+                'level': log_level
             },
             # Use the below to log to a file. Currently just logging to command line
             # 'file': {
@@ -24,18 +25,12 @@ def setup_logging(log_level):
             #     'filename': 'app.log',
             # },
         },
-        'loggers': {
-            '': {  # root logger
-                'handlers': ['console', 'file'],
-                'level': 'INFO',
-                'propagate': True
-            },
-            'my_module': {
-                'handlers': ['console', 'file'],
-                'level': 'INFO',
-                'propagate': False
-            },
+        'root': {
+            # 'handlers': ['console', 'file'], #  Add 'file' handler if we want to log to file
+            'handlers': ['console'],
+            'level': log_level
         }
     }
 
     logging.config.dictConfig(logging_config)
+    coloredlogs.install(level=log_level)
