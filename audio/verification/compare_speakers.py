@@ -1,5 +1,9 @@
+import logging
+
 import numpy as np
 from scipy.spatial.distance import cdist
+
+logger = logging.getLogger(__name__)
 
 
 def compare_two_embeddings(embedding1: np.ndarray, embedding2: np.ndarray) -> float:

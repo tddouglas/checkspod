@@ -7,7 +7,8 @@ from helpers.txt_file_helper import write_to_text_file
 logger = logging.getLogger(__name__)
 
 
-def audio_pipeline(filename: str, diarization_method:str, save_rttm_file: bool, transcribe_method: str, save_transcript: bool, verification_pipeline: str):
+def audio_pipeline(filename: str, diarization_method:str, save_rttm_file: bool, transcribe_method: str,
+                   save_transcript: bool, verification_pipeline: str):
     if diarization_method:
         annotation = diarization_pipeline(filename, diarization_method, save_rttm_file)
     else:  # Diarization should already exist in RTTM file

@@ -2,12 +2,12 @@ import argparse
 import logging
 from dotenv import load_dotenv
 
-from audio.audio import audio_pipeline
+from audio.audio_pipeline import audio_pipeline
 from audio.diarization.benchmark import pyannote_vs_whisperx_runtime
 from audio.diarization.pipeline import diarization_pipeline
 from audio.verification.compare_speakers import compare_all_embeddings
 from checkspod_api.checkspod_downloader import checkspod_pipeline
-from database.database_connector import iterate_episodes
+from database.sqldb_connector import iterate_episodes
 from helpers.logger import setup_logging
 
 
@@ -61,4 +61,4 @@ if __name__ == '__main__':
                 embeddings[episode.filename] = embedding
             print(compare_all_embeddings(embeddings))
         case "_":
-            logger.debug("No valid argument provided")
+            logger.warning("No valid argument provided")

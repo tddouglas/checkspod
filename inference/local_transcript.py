@@ -3,8 +3,6 @@ import torch
 
 from helpers.txt_file_helper import read_in_txt
 
-# Take in text and process it
-
 '''
 Goal - Separate out last 5 minutes of audio into text and determine:
 1. What are the names of the quiz participants. 

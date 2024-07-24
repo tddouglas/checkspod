@@ -1,4 +1,4 @@
-from audio.audio import audio_pipeline
+from audio.audio_pipeline import audio_pipeline
 from database.model import Episodes
 import time
 

@@ -24,9 +24,9 @@ is [pushed to dev branch](https://github.com/pyannote/pyannote-audio/issues/1576
 - Move pipeline into it's own class? Make it easier to initialize/update
 
 ## Reading
-1. https://docs.voice-ping.com/voiceping-corporation-company-profile/apr-2024-speaker-diarization-performance-evaluation-pyannoteaudio-vs-nvidia-nemo-and-post-processing-approach-using-openais-gpt-4-turbo
-2. https://www.gladia.io/blog/build-a-speaker-identification-system-for-online-meetings
-3. https://medium.com/@gil.shomron/whos-talking-speaker-diarization-and-emotion-recognition-in-radio-3e9623baeb2c
+- [x] https://docs.voice-ping.com/voiceping-corporation-company-profile/apr-2024-speaker-diarization-performance-evaluation-pyannoteaudio-vs-nvidia-nemo-and-post-processing-approach-using-openais-gpt-4-turbo
+- [x] https://www.gladia.io/blog/build-a-speaker-identification-system-for-online-meetings
+- [x] https://medium.com/@gil.shomron/whos-talking-speaker-diarization-and-emotion-recognition-in-radio-3e9623baeb2c
 
 ## Thoughts
 1. Speaker diarization is good but not great. There are some incorrectly attributed parts of speach which I suspect

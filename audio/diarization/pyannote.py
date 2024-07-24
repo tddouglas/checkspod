@@ -1,3 +1,4 @@
+import logging
 import os
 import torchaudio
 import torch
@@ -9,6 +10,7 @@ from pyannote.core import Annotation
 from audio.torch import get_torch_device
 from helpers.audio_file_helper import construct_wav_path, construct_rttm_path
 
+logger = logging.getLogger(__name__)
 
 # What I'm implementing - https://github.com/openai/whisper/discussions/264#discussion-4451647
 # Review diarization tutorial for pyannote - https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/intro.ipynb
@@ -25,7 +27,7 @@ def pyannote_diarization(filename: str, save_rttm_file, num_speakers=3) -> tuple
             diarization, embeddings = pipeline({"waveform": waveform, "sample_rate": sample_rate}, hook=hook,
                                                num_speakers=num_speakers, return_embeddings=True)
     except AttributeError as e:
-        print("Error evaluating pipeline", e)
+        logger.critical("Error evaluating pipeline", e)
 
     if save_rttm_file:
         # Output diarization to standard RTTM file
@@ -34,9 +36,9 @@ def pyannote_diarization(filename: str, save_rttm_file, num_speakers=3) -> tuple
                 diarization.write_rttm(rttm)
         except IOError as e:
             # Handles exceptions raised by file operations (e.g., file not found, disk full, etc.)
-            print(f"An error occurred while writing the file: {e}")
+            logger.critical(f"An error occurred while writing the file: {e}")
         except Exception as e:
             # This is a more general exception to catch any other exceptions that may occur
-            print(f"An unexpected error occurred: {e}")
+            logger.critical(f"An unexpected error occurred: {e}")
 
     return diarization, embeddings
