@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Union
 
 
 class APINestedResource(BaseModel):
@@ -20,10 +20,10 @@ class APIEpisode(BaseModel):
     summary: str
     type: str
     explicit: bool
-    audio: APINestedResource
     duration: float
-    cover: APINestedResource
     status: str
+    cover: Union[APINestedResource, None]
+    audio: APINestedResource
     _id: str
     isStarter: bool
 

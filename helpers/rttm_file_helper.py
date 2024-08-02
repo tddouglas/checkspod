@@ -1,5 +1,10 @@
-from helpers.audio_file_helper import construct_rttm_path
 from pyannote.core import Annotation, Segment
+
+from helpers.file_helper import get_base_path
+
+
+def construct_rttm_path(filename):
+    return get_base_path() + 'rttm_audio/' + filename + '.rttm'
 
 
 def read_rttm_file(filename: str) -> Annotation:

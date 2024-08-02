@@ -2,7 +2,7 @@ import logging
 import os
 from typing import Union
 
-logger = logging.getLogger('__name__')
+logger = logging.getLogger(__name__)
 
 
 def get_base_path() -> Union[str, None]:
@@ -14,4 +14,4 @@ def get_base_path() -> Union[str, None]:
         case "Mac":
             return "checkspod_files.nosync/"
         case "_":
-            logger.critical("No operating system found")
+            logger.critical("No valid operating system found")

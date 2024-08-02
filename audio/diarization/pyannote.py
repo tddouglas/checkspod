@@ -8,7 +8,8 @@ from pyannote.audio.pipelines.utils.hook import ProgressHook
 from pyannote.core import Annotation
 
 from audio.torch import get_torch_device
-from helpers.audio_file_helper import construct_wav_path, construct_rttm_path
+from helpers.audio_file_helper import construct_wav_path
+from helpers.rttm_file_helper import construct_rttm_path
 
 logger = logging.getLogger(__name__)
 

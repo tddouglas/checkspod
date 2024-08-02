@@ -1,8 +1,11 @@
+import logging
 import sqlite3
-from typing import Generator
+from typing import Generator, List, Tuple
 
 from bs4 import BeautifulSoup
-from database.model import Episodes
+from database.model import Episodes, Embeddings
+
+logger = logging.getLogger(__name__)
 
 try:
     # Connect to the database file (it will create the file if it doesn't exist)
@@ -23,26 +26,36 @@ def iterate_episodes(limit=0) -> Generator[Episodes, None, None]:
         yield episode
 
 
-# Boilerplate for row insert
-def insert_row(column_name_tuple, tuple_to_insert):
-    # Insert a row of data
-    cur.execute("INSERT INTO episodes (name, value) VALUES ('SampleName', 'SampleValue')")
+def fetch_embeddings_for_episode(episode_id: int) -> List[Tuple[Embeddings.embedding_index, Embeddings.participant]]:
+    query = (Embeddings
+             .select(Embeddings.embedding_index, Embeddings.participant)
+             .where(Embeddings.episode == episode_id))
 
-    # Save (commit) the changes
-    conn.commit()
+    # Iterate through the results
+    for embedding in query:
+        logger.info(
+            f'Embedding Index: {embedding.embedding_index}, Participant ID: {embedding.participant.id if embedding.participant else "Unknown"}')
+
+    return [(embedding.embedding_index, embedding.participant.id) for embedding in query]
+
+def close_connection():
+    conn.close()
+
+# Boilerplate for row insert
+# def insert_row(column_name_tuple, tuple_to_insert):
+#     # Insert a row of data
+#     cur.execute("INSERT INTO episodes (name, value) VALUES ('SampleName', 'SampleValue')")
+#
+#     # Save (commit) the changes
+#     conn.commit()
 
 
 # Boilerplate to iterate through every row of table and perform some update
-def update_every_entry():
-    query = Episodes.select()
-    for episodes in query:
-        soup = BeautifulSoup(episodes.summary)
-        new_summary = soup.get_text()
-
-        update_query = Episodes.update(summary=new_summary).where(Episodes.id == episodes.id)
-        update_query.execute()
-
-
-def close_connection():
-    # Close the connection when done
-    conn.close()
+# def update_every_entry():
+#     query = Episodes.select()
+#     for episodes in query:
+#         soup = BeautifulSoup(episodes.summary)
+#         new_summary = soup.get_text()
+#
+#         update_query = Episodes.update(summary=new_summary).where(Episodes.id == episodes.id)
+#         update_query.execute()

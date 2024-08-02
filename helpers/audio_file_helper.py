@@ -15,12 +15,13 @@ def construct_wav_path(filename):
     return get_base_path() + filename + '.wav'
 
 
-def construct_rttm_path(filename):
-    return get_base_path() + 'rttm_audio/' + filename + '.rttm'
+def construct_mp3_path(filename):
+    return get_base_path() + 'original_audio/' + filename + '.mp3'
 
 
 # Open mp3 file, shorten it, then convert it to .wav
 def mp3_to_wav_pipeline(mp3_audio_path, wav_audio_path):
+    # TODO: Ensure this still works. Requires adopting new checkspod schema
     mp3_audio = load_mp3_audio(mp3_audio_path)
     shortened_audio = shorten_audio(mp3_audio)
     export_wav_audio(shortened_audio, wav_audio_path)
@@ -31,7 +32,7 @@ def load_mp3_audio(audio_path):
 
 
 def load_wav_audio(audio_path):
-    return AudioSegment.from_file(audio_path)
+    return AudioSegment.from_file(construct_wav_path(audio_path))
 
 
 def audio_to_nparray(trimmed_audio):

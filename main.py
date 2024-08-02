@@ -2,11 +2,6 @@ import argparse
 import logging
 from dotenv import load_dotenv
 
-from audio.audio_pipeline import audio_pipeline
-from audio.diarization.benchmark import pyannote_vs_whisperx_runtime
-from audio.diarization.pipeline import diarization_pipeline
-from audio.verification.compare_speakers import compare_all_embeddings
-from checkspod_api.checkspod_downloader import checkspod_pipeline
 from database.sqldb_connector import iterate_episodes
 from helpers.logger import setup_logging
 
@@ -34,27 +29,38 @@ if __name__ == '__main__':
 
     match args.action:
         case "pipeline-update":
-            logger.debug("Pipeline update started")
-            checkspod_download_res = checkspod_pipeline()
+            from checkspod_api.checkspod_downloader import checkspod_pipeline
+
+            logger.info("Pipeline update started")
+            checkspod_download_res = checkspod_pipeline(args.number_of_episodes)
             if checkspod_download_res:
-                print("Successfully downloaded latest episodes")
+                logger.info("Successfully downloaded latest episodes")
         case "runtime-comparison":
-            logger.debug("Runtime comparison started")
+            from audio.diarization.test.benchmark import pyannote_vs_whisperx_runtime
+
+            logger.info("Runtime comparison started")
             for episode in iterate_episodes(args.number_of_episodes):
                 pyannote_vs_whisperx_runtime(episode)
         case "pyannote-transcribe":
+            from audio.audio_pipeline import audio_pipeline
+
             logger.debug("Custom transcribe file started")
             for episode in iterate_episodes(args.number_of_episodes):
                 logger.info(f'Title: {episode.title}, Description:\n {episode.summary}')
                 transcript = audio_pipeline(episode.filename, "pyannote", False, "whisperx", False, None)
                 print(transcript)
         case "whisperx-transcribe":
+            from audio.audio_pipeline import audio_pipeline
+
             logger.debug("Whisperx transcribe file started")
             for episode in iterate_episodes(args.number_of_episodes):
                 logger.info(f'Title: {episode.title}, Description:\n {episode.summary}')
                 transcript = audio_pipeline(episode.filename, "whisperx", False, "whisperx", False, None)
                 print(transcript)
         case "test":
+            from audio.diarization.diarization_pipeline import diarization_pipeline
+            from audio.verification.compare_speakers import compare_all_embeddings
+
             embeddings = {}
             for episode in iterate_episodes(args.number_of_episodes):
                 annotation, embedding = diarization_pipeline(episode.filename, "pyannote", False)

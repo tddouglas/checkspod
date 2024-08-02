@@ -1,6 +1,6 @@
 import logging
 
-from audio.diarization.pipeline import diarization_pipeline
+from audio.diarization.diarization_pipeline import diarization_pipeline
 from helpers.rttm_file_helper import read_rttm_file
 from helpers.txt_file_helper import write_to_text_file
 
